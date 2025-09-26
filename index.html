@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silly Question Prank</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    #questionBox {
+      position: absolute;
+      background: white;
+      border: 2px solid #333;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      display: none;
+    }
+
+    #questionBox h2 {
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .yes {
+      background: #4ade80;
+      color: white;
+    }
+
+    .no {
+      background: #ef4444;
+      color: white;
+    }
+
+    #finalMsg {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2563eb;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="questionBox">
+    <h2 id="questionText"></h2>
+    <button id="yesBtn" class="btn yes">Yes</button>
+    <button id="noBtn" class="btn no">No</button>
+  </div>
+
+  <div id="finalMsg">🎉 You finally admitted it! 🎉</div>
+
+  <script>
+    const questionBox = document.getElementById("questionBox");
+    const questionText = document.getElementById("questionText");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const finalMsg = document.getElementById("finalMsg");
+
+    // Short, silly prank questions
+    const sillyQuestions = [
+      "Are you a dog? 🐶",
+      "Are you a cat? 🐱",
+      "Are you a monkey? 🐵",
+      "Are you a potato? 🥔",
+      "Are you a banana? 🍌",
+      "Are you a robot? 🤖",
+      "Are you a clown? 🤡",
+      "Are you a ghost? 👻",
+      "Are you a chicken? 🐔",
+      "Are you an alien? 👽"
+    ];
+
+    // Pick a random silly question
+    const randomQuestion = sillyQuestions[Math.floor(Math.random() * sillyQuestions.length)];
+    questionText.textContent = randomQuestion;
+    questionBox.style.display = "block";
+    moveBox(); // first random spot
+
+    // Yes → show final message
+    yesBtn.addEventListener("click", () => {
+      questionBox.style.display = "none";
+      finalMsg.style.display = "block";
+    });
+
+    // No → move box
+    noBtn.addEventListener("click", moveBox);
+
+    function moveBox() {
+      let x = Math.random() * (window.innerWidth - questionBox.offsetWidth);
+      let y = Math.random() * (window.innerHeight - questionBox.offsetHeight);
+      questionBox.style.left = `${x}px`;
+      questionBox.style.top = `${y}px`;
+    }
+  </script>
+</body>
+</html>
